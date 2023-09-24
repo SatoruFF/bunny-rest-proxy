@@ -11,12 +11,14 @@
         "pretest": "npm run build",
         "start": "node build/index.js",
         "fmt": "prettier --config .prettierrc 'src/**/*.ts' --write",
-        "lint": "eslint . --ext .ts"
+        "lint": "eslint . --ext .ts",
+        "build-exe": "pkg ."
     },
     "author": "Paweł Kuffel <pawel@kuffel.io>",
     "license": "Apache-2.0",
     "dependencies": {
         "ajv": "^8.11.0",
+        "dotenv": "^16.3.1",
         "fastify": "^3.27.4",
         "fastify-amqp-async": "^1.0.1",
         "fastify-error": "^1.0.0",
@@ -40,10 +42,19 @@
         "eslint-plugin-prettier": "^4.0.0",
         "jest": "^27.5.1",
         "jest-mock-extended": "^2.0.5",
+        "pkg": "^5.8.1",
         "prettier": "^2.6.2",
         "supertest": "^6.2.2",
         "ts-jest": "^27.1.4",
         "tsc-watch": "^5.0.3",
         "typescript": "^4.7.3"
+    },
+    "bin": {
+        "proxyApp": "./build/index.js"
+    },
+    "pkg": {
+        "scripts": "build/**/*.js",
+        "assets": ["./config.yml"],
+        "outputPath": "exec"
     }
 }

@@ -1,3 +1,8 @@
+import dotenv from 'dotenv'
+dotenv.config()
+
+console.log("Rabbit connection string:", process.env.BRP_CONN_STR)
+
 enum LogLevel {
     INFO = 'info',
     ERROR = 'error',
@@ -12,6 +17,8 @@ export interface EnvValues {
     BRP_LOG_LEVEL?: string;
     BRP_LOG_PRETTY?: string;
     BRP_CONN_STR?: string;
+    METRIC_PORT?: number;
+    MAIN_PORT?: number;
 }
 
 export interface EnvConfig {
