@@ -17,7 +17,14 @@ const mainHost = process.env.MAIN_HOST || '0.0.0.0';
 
 async function start() {
     const envConfig = buildEnvConfig(process.env as EnvValues);
-    const configFile = fs.readFileSync(path.resolve(__dirname, '../config.yml'), 'utf8');
+    let configFile;
+    //@ts-ignore
+    if (process.pkg) {  
+        let folderPath = path.dirname(process.execPath)
+        configFile = fs.readFileSync(path.join(folderPath, 'config.yml'))
+    } else {
+        configFile = fs.readFileSync(path.resolve(__dirname, '../config.yml'), 'utf8');
+    }
     const yamlConfig = buildYamlConfig(configFile);
     const metricsServer = buildMetricsServer();
     const metricsCollector = new MetricsCollector(metricsServer);
